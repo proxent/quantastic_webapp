@@ -419,8 +419,10 @@ input::-webkit-inner-spin-button {
 #data-table-rect {
     background-color: var(--dark-gordons-green);
     position: absolute;
-    width: 100%;
-    height: 100%;
+    /*width: 100%;*/
+    /*height: 100%;*/
+    width: 1589.5px;
+    height: 155px;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
