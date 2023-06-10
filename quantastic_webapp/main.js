@@ -1,5 +1,6 @@
 const gordons_green = '#303531';
 const dark_gordons_green = '#262926';
+const light_grey_gordons_green = '#8A958C';
 
 const jsonData = {
     "name": "Samsung Electronics",
@@ -889,10 +890,22 @@ const dateInputHandler = function(event) {
     console.log(event.target.value);
     console.log('Start Date Changed: ' + startDateInput.value);
     console.log('End Date Changed: ' + endDateInput.value);
+
+
+
+    //const newDates = (startDateInput.value, endDateInput.value);
 }
 
 startDateInput.addEventListener('change', dateInputHandler);
 endDateInput.addEventListener('change', dateInputHandler);
+
+
+//TODO : MAke graph update based on start and end date
+/*
+const updateDate = function(event) {
+    
+}
+*/
 
 /* Get Type input */
 
@@ -940,9 +953,50 @@ percentInput.addEventListener('change', percentInputHandler);
 */
 
 
-/* TODO: Data Table 구현 */
+/* Button Listeners */
 
-// TODO: Edit trace and layout for data table
+const watchlistEventListener = document.getElementById('watchlist_toggle');
+
+var showWatchlist = true;
+const dataDiv = document.querySelector('.visualized-data');
+
+const watchlistInputHandler = function(event) {
+    /*TODO: toggle watchlist*/
+    /*change candlestick-chart top=50%, max-height=700px*/
+    /*change data-table dislplay to none*/
+    /*candlestick-chart.maximized*/
+    /*data-table-rect.hide*/
+
+    showWatchlist = !(showWatchlist);
+    console.log(showWatchlist);
+    console.log("Watchlist Toggle Pressed");
+
+
+    if (showWatchlist == false) {
+        Array.from(dataDiv.children).forEach(childDiv => {
+            childDiv.classList.remove('candlestick-chart');
+            childDiv.classList.remove('data-table');
+            childDiv.removeAttribute('data-table-rect');
+            childDiv.removeAttribute('data-table-chart');
+            childDiv.id = 'candlestick-chart-maximized';
+        });
+    }
+    else if (showWatchlist == true) {
+        Array.from(dataDiv.children).forEach(childDiv => {
+            childDiv.classList.remove('candlestick-chart-maximized');
+            childDiv.id = 'candlestick-chart';
+        })
+        const newDiv = document.createElement('div');
+        newDiv.classList.add('data-table');
+        newDiv.classList.add('data-table-rect');
+        newDiv.classList.add('data-table-chart');
+        dataDiv.appendChild(newDiv);
+    }
+}
+
+watchlistEventListener.addEventListener('click', watchlistInputHandler);
+
+/* TODO: Data Table 구현 */
 
 var dataTableValues = [
     ['<b>Samsung Electronics</b>', '<b>Coupang</b>', '<b>NAVER</b>', '<b>Kakao</b>', '<b>Smilegates</b>'],
@@ -968,7 +1022,7 @@ var dataTableData = [{
         align: ["left", "left"],
         line: {color: dark_gordons_green, width: 1},
         fill: {color: [dark_gordons_green, dark_gordons_green]},
-        font: {family: "Droid Sans", size: 11, color: ["#525953"]}
+        font: {family: "Droid Sans", size: 11, color: [light_grey_gordons_green]}
     }
 }]
 

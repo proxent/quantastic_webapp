@@ -9,7 +9,9 @@
     <!-- Include Plotly JavaScript library -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <!-- Include Plotly CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.plot.ly/plotly-latest.min.css">
+    <!--<link rel="stylesheet" type="text/css" href="https://cdn.plot.ly/plotly-latest.min.css" charset="utf-8">-->
+    <link rel="shortcut icon" href="#">
+    <!-- Microsoft Edge : favicon.ico -- Error 404 -->
 </head>
 <body>
     <div class="background-layer">
@@ -27,7 +29,7 @@
             <li><button><img src="icons/save.svg" class="tool3"></button></li>
         </ul>
         <ul class="sidemenu-others">
-            <li><button><img src="icons/watchlist_toggle.svg" class="tool"></button></li>
+            <li><button><img src="icons/watchlist_toggle.svg" class="tool" id="watchlist_toggle"></button></li>
             <li><button><img src="icons/user.svg" class="tool"></button></li>
         </ul>
     </div>
@@ -79,9 +81,9 @@
 
                 <div class="viewport">
                     <div class="viewport-rect">
-                        <div class="candlestick">
-                            <!--<div id="candlestick-chart" style="width: 100%; max-width: 1580px; height: 100%; max-height: 700px;"></div>-->
-                            <div id="candlestick-chart" style="width: 100%; max-width: 1580px; height: 100%;"></div>
+                        <div class="visualized-data">
+                            <!--<div id="candlestick-chart-maximized" style="width: 100%; max-width: 1580px; height: 100%;"></div>-->
+                            <div id="candlestick-chart"></div>
                             <div class="data-table">
                                 <div id="data-table-rect"></div>
                                 <div id="data-table-chart" style="width: 100%; max-width: 1560px; height: 100%; max-height: 140px;"></div>
