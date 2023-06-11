@@ -392,7 +392,7 @@ input::-webkit-inner-spin-button {
     height: 100%;
 }
 
-#candlestick-chart {
+#chart {
     position: absolute;
     width: 100%;
     max-width: 1580px;
@@ -407,7 +407,7 @@ input::-webkit-inner-spin-button {
 
 /*TODO*/
 
-#candlestick-chart-maximized {
+#chart-maximized {
     position: absolute;
     max-height: 700px;
     top: 50%;

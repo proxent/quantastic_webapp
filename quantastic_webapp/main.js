@@ -24,56 +24,41 @@ fetch(url, {
   .then(response => response.json())
   .then(data => {
     console.log('Response:', data);
+    
+    const dates = data.prices.map(price => price.Date);
+    const totals = data.prices.map(price => parseFloat(price.total));
+    
+    console.log(dates);
+    console.log(totals);
+    
+    createPlot(dates, totals);
 
-    const jsonData = {
-        name: data.name,
-        prices: data.prices.map(price => ({
-          Date: price.date,
-          Open: price.open,
-          High: price.high,
-          Low: price.low,
-          Close: price.close,
-          'Adj Close': price.adj_close,
-          Volume: price.volume
-        }))
-      };
-      console.log(jsonData);
-      const dates = jsonData.prices.map(price => price.Date);
-      const opens = jsonData.prices.map(price => parseFloat(price.Open));
-      const highs = jsonData.prices.map(price => parseFloat(price.High));
-      const lows = jsonData.prices.map(price => parseFloat(price.Low));
-      const closes = jsonData.prices.map(price => parseFloat(price.Close));
-
-      console.log(dates);
-      console.log(opens);
-      console.log(highs);
-      console.log(lows);
-      console.log(closes);
-      
-      createPlot(dates, opens, lows, highs, lows, closes);
   })
   .catch(error => {
     console.error('Error:', error);
   });
 
-
-function createPlot(dates, opens, highs, lows, closes) {
+function createPlot(dates, totals) {
     const trace = {
         x: dates,
-        close: closes,
-        high: highs,
-        low: lows,
-        open: opens,
-        increasing: {
-            line: {color: '#53b18c'},
-            fillcolor: '#53b18c'
+        y: totals,
+        mode: 'lines',
+        line: {
+            color: '#53b18c',
+            width: 2
         },
-        decreasing: {
-            line: {color: '#FF4136'},
-            fillcolor: '#FF4136'
-        },
-        type: 'candlestick',
+        type: 'scatter'
     };
+
+    // Compute the slope between consecutive points and set the line color accordingly
+    for (let i = 1; i < totals.length; i++) {
+        const slope = totals[i] - totals[i - 1];
+        if (slope > 0) {
+        trace.line.color[i - 1] = '#53b18c'; // Green color for increasing values
+        } else {
+        trace.line.color[i - 1] = '#FF4136'; // Red color for decreasing values
+        }
+    }
 
     const layout = {
         paper_bgcolor: 'rgba(0, 0, 0, 0)',
@@ -90,9 +75,6 @@ function createPlot(dates, opens, highs, lows, closes) {
         },
         xaxis: {
             autorange: true,
-            rangeslider: {
-                visible: false
-            },
             showgrid: true,
             gridcolor: '#525953',
         },
@@ -104,11 +86,10 @@ function createPlot(dates, opens, highs, lows, closes) {
         },
     };
     
-    const plotdata = [trace];
+    const data = [trace];
     
-    Plotly.newPlot('candlestick-chart', plotdata, layout);
+    Plotly.newPlot('chart', data, layout);
 }
-
 
 /* Get Data Input */
 
@@ -292,9 +273,8 @@ saveButton.addEventListener('click', saveButtonHandler);
 /* Data Table 구현 */
 
 var dataTableValues = [
+    ['<b>SAM</b>', '<b>COU</b>', '<b>NAV</b>', '<b>KAK</b>', '<b>SMI</b>'],
     ['<b>Samsung Electronics</b>', '<b>Coupang</b>', '<b>NAVER</b>', '<b>Kakao</b>', '<b>Smilegates</b>'],
-    [1200000, 20000, 80000, 2000, 12120000],
-    [1300000, 20000, 70000, 2000, 130902000],
     [1300000, 20000, 70000, 2000, 130902000],
     [1300000, 20000, 70000, 2000, 130902000],
     [1300000, 20000, 70000, 2000, 130902000]
@@ -303,7 +283,7 @@ var dataTableValues = [
 var dataTableData = [{
     type: 'table',
     header: {
-        values: [["<b>INDEX</b>"], ["<b>NAME</b>"], ["<b>VOLUME</b>"], ["<b>LAST</b>"],
+        values: [["<b>INDEX</b>"], ["<b>NAME</b>"], ["<b>LAST</b>"],
                     ["<b>CHANGE(AMT)</b>"], ["<b>CHANGE(%)</b>"]],
         align: ["left", "left"],
         line: {width: 1, color: dark_gordons_green},
