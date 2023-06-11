@@ -12,7 +12,6 @@ const payload = {
    'account_code': 'ifrs_Equity', // don't think too much about this right now. At the dropdown menu you made, let's map '순자산' with 'ifrs_Equity' 
    'rank': 10, // not like what I said, this means rank not the percentage.
    'order': 'asc' // asc for ascending order, desc for descending order
-   
 };
 
 fetch(url, {
@@ -45,15 +44,21 @@ fetch(url, {
       const lows = jsonData.prices.map(price => parseFloat(price.Low));
       const closes = jsonData.prices.map(price => parseFloat(price.Close));
 
-      /*
       console.log(dates);
       console.log(opens);
       console.log(highs);
       console.log(lows);
       console.log(closes);
-      */
+      
+      createPlot(dates, opens, lows, highs, lows, closes);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
 
-      const trace = {
+
+function createPlot(dates, opens, highs, lows, closes) {
+    const trace = {
         x: dates,
         close: closes,
         high: highs,
@@ -102,11 +107,7 @@ fetch(url, {
     const plotdata = [trace];
     
     Plotly.newPlot('candlestick-chart', plotdata, layout);
-
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
+}
 
 
 /* Get Data Input */
