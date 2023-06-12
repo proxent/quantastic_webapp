@@ -7,6 +7,32 @@ const custom_red = '#FF4136';
 
 // FETCH DATA FROM SERVER
 const url = 'http://ec2-15-165-203-22.ap-northeast-2.compute.amazonaws.com:8080/backtest';
+const layout = {
+    paper_bgcolor: 'rgba(0, 0, 0, 0)',
+    plot_bgcolor: 'rgba(0, 0, 0, 0)',
+    font: {
+        color: '#FCFCFC',
+    },
+    dragmode: 'pan',
+    margin: {
+        r: 40,
+        t: 20,
+        b: 45,
+        l: 30
+    },
+    xaxis: {
+        autorange: true,
+        showgrid: true,
+        gridcolor: '#525953',
+    },
+    yaxis: {
+      
+        autorange: true,
+        dtick: 1000,
+        gridcolor: '#525953',
+        side: 'right'
+    },
+};
 const payload = {
     'start_date': '2016-04-30', // start_date should be always April
     'end_date': '2019-04-30', // so is end_date
@@ -42,6 +68,9 @@ async function fetchAPI() {
     });
     const data = await response.json();
     console.log(response, data);
+
+
+
     const dates = data.prices.map(price => price.Date);
     const totals = data.prices.map(price => parseFloat(price.total));
 
@@ -49,7 +78,8 @@ async function fetchAPI() {
     console.log(totals);
 
     var account_code = payload.account_code;
-    var account_name = getAccountName(account_code);
+    //var account_name = getAccountName(account_code);
+    var account_name = accountData[account_code];
     var change = getChange(totals);
 
     createPlot(dates, totals);
@@ -79,39 +109,11 @@ function createPlot(dates, totals) {
             trace.line.color[i - 1] = '#FF4136'; // Red color for decreasing values
         }
     }
-
-    const layout = {
-        paper_bgcolor: 'rgba(0, 0, 0, 0)',
-        plot_bgcolor: 'rgba(0, 0, 0, 0)',
-        font: {
-            color: '#FCFCFC',
-        },
-        dragmode: 'pan',
-        margin: {
-            r: 40,
-            t: 20,
-            b: 45,
-            l: 30
-        },
-        xaxis: {
-            autorange: true,
-            showgrid: true,
-            gridcolor: '#525953',
-        },
-        yaxis: {
-            autorange: true,
-            dtick: 1000,
-            gridcolor: '#525953',
-            side: 'right'
-        },
-    };
-
     const data = [trace];
-
     Plotly.newPlot('chart', data, layout);
 }
 
-var accountData = {
+const accountData = {
     'ifrs_Assets': '자산총계',
     'ifrs_CurrentAssets': '유동자산',
     'ifrs_CashAndCashEquivalents': '현금및현금성자산',
@@ -178,15 +180,11 @@ var accountData = {
 // Based on chosen option from dropdown menu, update account_code on payload
 // Based on account_code on payload, call getAccountName(account_name)
 
-var selectedAccountName = '자산총계'; //selected from dropdown menu
-var selectedAccountCode = accountData[selectedAccountName];
-console.log(selectedAccountCode); // Output: ifrs_Assets
+var selectedAccountCode = 'ifrs_Assets'; //selected from dropdown menu
+var selectedAccountName = accountData[selectedAccountCode];
+console.log(selectedAccountName); // Output: 자산총계
 
-console.log(accountData[selectedAccountCode]);
-
-
-
-
+/*
 function getAccountName(account_code) {
     var account_name = "";
 
@@ -195,6 +193,13 @@ function getAccountName(account_code) {
     };
 
     return account_name;
+}
+*/
+
+function changePayload(payload) {
+    payload.acocunt_code = account_code;
+
+    return payload;
 }
 
 function getChange(totals) {
@@ -257,7 +262,6 @@ function createDataTable(account_code, account_name, dates, totals, change) {
 }
 
 function UpdatePlot(data, layout) {
-
     Plotly.newPlot('candlestick-chart', data, layout);
 }
 
@@ -266,7 +270,6 @@ function UpdatePlot(data, layout) {
      WORKAROUND: Disable ENTER key -- event.keyCode != 13
  ISSUE: after giving input of 3 digits AND >100 --> can no longer change text, can only change after erasing all of text
 */
-
 
 
 /* Button Listeners */
