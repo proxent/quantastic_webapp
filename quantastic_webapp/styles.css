@@ -331,7 +331,7 @@ input::-webkit-inner-spin-button {
     outline: 0;
 }
 
-.header .percent-bar .percent-icon {
+.header .percent-bar .rank-icon {
     position: absolute;
     width: 20px;
     height: 20px;

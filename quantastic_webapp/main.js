@@ -29,7 +29,7 @@ async function fetchAPI() {
         'start_date': document.getElementById('date-start').value,
         'end_date': document.getElementById('date-end').value,
         'account_code': document.getElementById('account_type').value,
-        'rank': document.getElementById('percent').value,
+        'rank': document.getElementById('rank').value,
         'order': document.getElementById('order').checked ? 'desc' : 'asc',
     };
     console.log('payload', payload);
@@ -261,78 +261,12 @@ function UpdatePlot(data, layout) {
     Plotly.newPlot('candlestick-chart', data, layout);
 }
 
-
-/* Get Date Input */
-
-const startDateInput = document.getElementById('date-start');
-const endDateInput = document.getElementById('date-end');
-//const testOut = document.getElementById('test');
-
-console.log(startDateInput.value);
-console.log(endDateInput.value);
-
-//TODO : Make graph update based on start and end date
-// PLAN : create UpdatePlot() function
-/*
-const updateDate = function(event) {
-    
-}
-*/
-
-/* Get Type input */
-
-const accountInput = document.getElementById('account_type');
-console.log(accountInput.value); // print initial value
-
-const accountInputHandler = function (event) {
-    console.log(event.target.value);
-    console.log('Account Type Changed: ' + accountInput.value);
-
-    UpdatePlot();
-}
-
-accountInput.addEventListener('change', accountInputHandler);
-
-/* Get Slider Input */
-
-const sliderInput = document.querySelector("input[name=checkbox]");
-console.log(sliderInput.checked);
-
-const sliderInputHandler = function (event) {
-    if (this.checked) {
-        console.log(sliderInput.checked + ": Set to Low");
-    } else {
-        console.log(sliderInput.checked + ": Set to High");
-    }
-}
-
-sliderInput.addEventListener('change', sliderInputHandler);
-
-/* Get Percent Input */
-
-const percentInput = document.getElementById('percent');
-console.log(percentInput.value);
-
-const percentInputHandler = function (event) {
-    console.log(event.target.value);
-    console.log('Percent Input Changed: ' + percentInput.value);
-}
-
-percentInput.addEventListener('change', percentInputHandler);
-
 /*
  ISSUE: percent input reinitializes webpage when pressing ENTER, but changing the input works
      WORKAROUND: Disable ENTER key -- event.keyCode != 13
  ISSUE: after giving input of 3 digits AND >100 --> can no longer change text, can only change after erasing all of text
 */
 
-const updateButton = document.querySelector(".update_button");
-
-const updateButtonHandler = function (event) {
-    console.log("Update Button Pressed");
-}
-
-updateButton.addEventListener('click', updateButtonHandler);
 
 
 /* Button Listeners */

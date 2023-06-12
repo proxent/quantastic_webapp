@@ -43,13 +43,13 @@
                 <div class="header">
                     <div class="date-bar">
                         <input type="date" id="date-start" name="date start" value="2016-04-30" min="2022-01-01"
-                            max="2023-05-01" onchange="fetchAPI()">
+                            max="2023-05-01">
                         <div class="tilde-icon"><img src="icons/tilde.svg"></div>
                         <input type="date" id="date-end" name="date end" value="2017-04-30" min="2022-01-01"
-                            max="2023-05-01" onchange="fetchAPI()">
+                            max="2023-05-01">
                     </div>
                     <div class="type-bar">
-                        <select id="account_type" name="type-input" placeholder="Select Data" onchange="fetchAPI()">
+                        <select id="account_type" name="type-input" placeholder="Select Data">
                             <option value="dart_ProfitLossForStatementOfCashFlows">당기순이익</option>
                             <option value="ifrs_CashAndCashEquivalents">현금 및 현금성 자산</option>
                             <option value="dividend">배당수익률</option>
@@ -67,8 +67,8 @@
                     <div class="high-low-slider">
                         <div id="high-text"><b>상위</b></div>
                         <label class="switch">
-                            <input id="order" type="checkbox" name="checkbox" onchange="fetchAPI()">
-                            <span class="round-slider"></span>
+                            <input id="order" type="checkbox" name="checkbox"">
+                            <span class=" round-slider"></span>
                         </label>
                         <div id="low-text"><b>하위</b></div>
                     </div>
@@ -76,15 +76,15 @@
                         <form>
                             <!-- Disable ENTER for now : event.keyCode!=13 -->
                             <!-- ISSUE: Allows letter input : change to numbers-only -->
-                            <input type="text" id="percent" name="percent-input" value="10" max="100" min="1"
+                            <input type="text" id="rank" name="percent-input" value="10" max="100" min="1"
                                 onKeyPress="return (event.keyCode!=13 && this.value.length<4 && this.value<=100);"
                                 onInput="if(this.value.length>3) { this.value = this.value.slice(0,3); }"
                                 title="Range: 1~100" onchange="fetchAPI()">
                         </form>
-                        <div class="percent-icon"><img src="icons/percent.svg"></div>
+                        <div class="percent-icon"><img src="icons/rank.svg"></div>
                     </div>
                     <div class="update_button_container">
-                        <button class="update_button"></b>Update</button>
+                        <button id="update_button" class="update_button" onclick="fetchAPI()"></b>Run</button>
                     </div>
                     <div class="logo-placement"><img src="logo/logo.svg" id="logo"></div>
                 </div>
