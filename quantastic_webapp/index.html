@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,14 +14,16 @@
     <link rel="shortcut icon" href="#">
     <!-- Microsoft Edge : favicon.ico -- Error 404 -->
 </head>
+
 <body>
+    <img src="loading.gif" id="loading" alt="Loading..." />
     <div class="background-layer">
         <img src="bg/circular_gradient.svg" class="circle-svg">
     </div>
     <div class="gradient-overlay"></div>
 
     <div class="sidemenu">
-        <ul class = "sidemenu-tools">
+        <ul class="sidemenu-tools">
             <li><button><img src="icons/zoom.svg" class="tool" id="zoom_button"></button></li>
             <li><button><img src="icons/zoom-out.svg" class="tool2" id="zoom_out_button"></button></li>
             <li><button><img src="icons/undo.svg" class="tool" id="undo_button"></button></li>
@@ -39,9 +42,11 @@
             <div class="results">
                 <div class="header">
                     <div class="date-bar">
-                        <input type="date" id="date-start" name="date start" value="2022-01-01" min="2022-01-01" max="2023-05-01">
+                        <input type="date" id="date-start" name="date start" value="2016-04-30" min="2022-01-01"
+                            max="2023-05-01">
                         <div class="tilde-icon"><img src="icons/tilde.svg"></div>
-                        <input type="date" id="date-end" name="date end" value="2022-03-31" min="2022-01-01" max="2023-05-01">
+                        <input type="date" id="date-end" name="date end" value="2017-04-30" min="2022-01-01"
+                            max="2023-05-01">
                     </div>
                     <div class="type-bar">
                         <select id="account_type" name="type-input" placeholder="Select Data">
@@ -111,8 +116,8 @@
                     <div class="high-low-slider">
                         <div id="high-text"><b>상위</b></div>
                         <label class="switch">
-                            <input type="checkbox" name="checkbox">
-                            <span class="round-slider"></span>
+                            <input id="order" type="checkbox" name="checkbox"">
+                            <span class=" round-slider"></span>
                         </label>
                         <div id="low-text"><b>하위</b></div>
                     </div>
@@ -120,12 +125,15 @@
                         <form>
                             <!-- Disable ENTER for now : event.keyCode!=13 -->
                             <!-- ISSUE: Allows letter input : change to numbers-only -->
-                            <input type="text" id="percent" name="percent-input" max="100" min="1" onKeyPress="return (event.keyCode!=13 && this.value.length<4 && this.value<=100);" onInput="if(this.value.length>3) { this.value = this.value.slice(0,3); }" title="Range: 1~100">
+                            <input type="text" id="rank" name="percent-input" value="10" max="100" min="1"
+                                onKeyPress="return (event.keyCode!=13 && this.value.length<4 && this.value<=100);"
+                                onInput="if(this.value.length>3) { this.value = this.value.slice(0,3); }"
+                                title="Range: 1~100" onchange="fetchAPI()">
                         </form>
-                        <div class="percent-icon"><img src="icons/percent.svg"></div>
+                        <div class="percent-icon"><img src="icons/rank.svg"></div>
                     </div>
                     <div class="update_button_container">
-                        <button class="update_button"></b>Update</button>
+                        <button id="update_button" class="update_button" onclick="fetchAPI()"></b>Run</button>
                     </div>
                     <div class="logo-placement"><img src="logo/logo.svg" id="logo"></div>
                 </div>
@@ -137,7 +145,8 @@
                             <div id="chart"></div>
                             <div class="data-table">
                                 <div id="data-table-rect"></div>
-                                <div id="data-table-chart" style="width: 100%; max-width: 1560px; height: 100%; max-height: 140px;"></div>
+                                <div id="data-table-chart"
+                                    style="width: 100%; max-width: 1560px; height: 100%; max-height: 140px;"></div>
                             </div>
                         </div>
                     </div>
@@ -147,4 +156,5 @@
     </div>
     <script src="main.js"></script>
 </body>
+
 </html>

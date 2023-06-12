@@ -7,14 +7,6 @@ const custom_red = '#FF4136';
 
 // FETCH DATA FROM SERVER
 const url = 'http://ec2-15-165-203-22.ap-northeast-2.compute.amazonaws.com:8080/backtest';
-var payload = {
-   'start_date': '2016-04-30', // start_date should be always April
-   'end_date': '2019-04-30', // so is end_date
-   'account_code': 'ifrs_Equity', // don't think too much about this right now. At the dropdown menu you made, let's map '순자산' with 'ifrs_Equity' 
-   'rank': 10, // not like what I said, this means rank not the percentage.
-   'order': 'asc' // asc for ascending order, desc for descending order
-};
-
 const layout = {
     paper_bgcolor: 'rgba(0, 0, 0, 0)',
     plot_bgcolor: 'rgba(0, 0, 0, 0)',
@@ -34,32 +26,57 @@ const layout = {
         gridcolor: '#525953',
     },
     yaxis: {
+      
         autorange: true,
         dtick: 1000,
         gridcolor: '#525953',
         side: 'right'
     },
 };
+const payload = {
+    'start_date': '2016-04-30', // start_date should be always April
+    'end_date': '2019-04-30', // so is end_date
+    'account_code': 'ifrs_Equity', // don't think too much about this right now. At the dropdown menu you made, let's map '순자산' with 'ifrs_Equity' 
+    'rank': 10, // not like what I said, this means rank not the percentage.
+    'order': 'asc' // asc for ascending order, desc for descending order
+};
 
-var data = [];
+function showLoading() {
+    document.getElementById("loading").style.display = "block";
+}
 
-fetch(url, {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify(payload),
-})
-  .then(response => response.json())
-  .then(data => {
-    console.log('Response:', data);
-    
+function hideLoading() {
+    document.getElementById("loading").style.display = "none";
+}
+
+async function fetchAPI() {
+    showLoading();
+    const payload = {
+        'start_date': document.getElementById('date-start').value,
+        'end_date': document.getElementById('date-end').value,
+        'account_code': document.getElementById('account_type').value,
+        'rank': document.getElementById('rank').value,
+        'order': document.getElementById('order').checked ? 'desc' : 'asc',
+    };
+    console.log('payload', payload);
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+    });
+    const data = await response.json();
+    console.log(response, data);
+
+
+
     const dates = data.prices.map(price => price.Date);
     const totals = data.prices.map(price => parseFloat(price.total));
-    
+
     console.log(dates);
     console.log(totals);
-    
+
     var account_code = payload.account_code;
     //var account_name = getAccountName(account_code);
     var account_name = accountData[account_code];
@@ -67,11 +84,9 @@ fetch(url, {
 
     createPlot(dates, totals);
     createDataTable(account_code, account_name, dates, totals, change);
+    hideLoading();
 
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
+}
 
 function createPlot(dates, totals) {
     const trace = {
@@ -89,18 +104,16 @@ function createPlot(dates, totals) {
     for (let i = 1; i < totals.length; i++) {
         const slope = totals[i] - totals[i - 1];
         if (slope > 0) {
-        trace.line.color[i - 1] = '#53b18c'; // Green color for increasing values
+            trace.line.color[i - 1] = '#53b18c'; // Green color for increasing values
         } else {
-        trace.line.color[i - 1] = '#FF4136'; // Red color for decreasing values
+            trace.line.color[i - 1] = '#FF4136'; // Red color for decreasing values
         }
     }
-    
-    data = [trace];
-    
+    const data = [trace];
     Plotly.newPlot('chart', data, layout);
 }
 
-var accountData = {
+const accountData = {
     'ifrs_Assets': '자산총계',
     'ifrs_CurrentAssets': '유동자산',
     'ifrs_CashAndCashEquivalents': '현금및현금성자산',
@@ -176,7 +189,7 @@ function getAccountName(account_code) {
     var account_name = "";
 
     if (account_code == "ifrs_Equity") {
-        account_name="순자산";
+        account_name = "순자산";
     };
 
     return account_name;
@@ -192,16 +205,16 @@ function changePayload(payload) {
 function getChange(totals) {
     const change_amt = [0];
     const change_percent = [0];
-    
-    for (let i=1; i < totals.length; i++) {
-        const change = totals[i] - totals[i-1];
-        const percent = (((change / totals[i-1]) * 100)*100).toFixed(1) + '%';
+
+    for (let i = 1; i < totals.length; i++) {
+        const change = totals[i] - totals[i - 1];
+        const percent = (((change / totals[i - 1]) * 100) * 100).toFixed(1) + '%';
 
         change_amt.push(change);
         change_percent.push(percent);
     }
 
-    return {change_amt, change_percent};
+    return { change_amt, change_percent };
 }
 
 /* Data Table */
@@ -215,26 +228,26 @@ function createDataTable(account_code, account_name, dates, totals, change) {
         change.change_amt,
         change.change_percent
     ]
-    
+
     var dataTableData = [{
         type: 'table',
         header: {
             values: [["<b>INDEX</b>"], ["<b>NAME</b>"], ["<b>DATE</b>"], ["<b>TOTAL</b>"],
-                        ["<b>CHANGE(AMT)</b>"], ["<b>CHANGE(%)</b>"]],
+            ["<b>CHANGE(AMT)</b>"], ["<b>CHANGE(%)</b>"]],
             align: ["left", "left"],
-            line: {width: 1, color: dark_gordons_green},
-            fill: {color: dark_gordons_green},
-            font: {family: "Droid Sans", size: 12, color: "white"}
+            line: { width: 1, color: dark_gordons_green },
+            fill: { color: dark_gordons_green },
+            font: { family: "Droid Sans", size: 12, color: "white" }
         },
         cells: {
             values: dataTableValues,
             align: ["left", "left"],
-            line: {color: dark_gordons_green, width: 1},
-            fill: {color: [dark_gordons_green, dark_gordons_green]},
-            font: {family: "Droid Sans", size: 11, color: [light_grey_gordons_green]}
+            line: { color: dark_gordons_green, width: 1 },
+            fill: { color: [dark_gordons_green, dark_gordons_green] },
+            font: { family: "Droid Sans", size: 11, color: [light_grey_gordons_green] }
         }
     }]
-    
+
     var dataTableLayout = {
         paper_bgcolor: 'rgba(0,0,0,0)',
         margin: {
@@ -244,108 +257,19 @@ function createDataTable(account_code, account_name, dates, totals, change) {
             l: 20,
         },
     }
-    
+
     Plotly.newPlot('data-table-chart', dataTableData, dataTableLayout);
 }
 
 function UpdatePlot(data, layout) {
-    
     Plotly.newPlot('candlestick-chart', data, layout);
 }
-
-
-/* Get Date Input */
-
-const startDateInput = document.getElementById('date-start');
-const endDateInput = document.getElementById('date-end');
-//const testOut = document.getElementById('test');
-
-console.log(startDateInput.value);
-console.log(endDateInput.value);
-
-const dateInputHandler = function(event) {
-    //testOut.innerHTML = event.target.value;
-    console.log(event.target.value);
-    console.log('Start Date Changed: ' + startDateInput.value);
-    console.log('End Date Changed: ' + endDateInput.value);
-
-    //const newDates = (startDateInput.value, endDateInput.value);
-}
-
-startDateInput.addEventListener('change', dateInputHandler);
-endDateInput.addEventListener('change', dateInputHandler);
-
-
-//TODO : Make graph update based on start and end date
-// PLAN : create UpdatePlot() function
-/*
-const updateDate = function(event) {
-    
-}
-*/
-
-/* Get Type input */
-
-const accountInput = document.getElementById('account_type');
-console.log(accountInput.value); // print initial value
-
-const accountInputHandler = function(event) {
-    console.log(event.target.value);
-    console.log('Account Type Changed: ' + accountInput.value);
-    
-    const account_code = accountInput.value;
-
-    //console.log(payload); //check if payload is visible
-
-    payload.acocunt_code = account_code;
-
-    UpdatePlot();
-}
-
-accountInput.addEventListener('change', accountInputHandler);
-
-/* Get Slider Input */
-
-const sliderInput = document.querySelector("input[name=checkbox]");
-console.log(sliderInput.checked);
-
-const sliderInputHandler = function(event) {
-    if(this.checked) {
-        console.log(sliderInput.checked + ": Set to Low");
-    } else {
-        console.log(sliderInput.checked + ": Set to High");
-    }
-}
-
-sliderInput.addEventListener('change', sliderInputHandler);
-
-/* Get Percent Input */
-
-const percentInput = document.getElementById('percent');
-console.log(percentInput.value);
-
-const percentInputHandler = function(event) {
-    console.log(event.target.value);
-    console.log('Percent Input Changed: ' + percentInput.value);
-}
-
-percentInput.addEventListener('change', percentInputHandler);
 
 /*
  ISSUE: percent input reinitializes webpage when pressing ENTER, but changing the input works
      WORKAROUND: Disable ENTER key -- event.keyCode != 13
  ISSUE: after giving input of 3 digits AND >100 --> can no longer change text, can only change after erasing all of text
 */
-
-
-/* Update Button */
-const updateButton = document.querySelector(".update_button");
-
-const updateButtonHandler = function(event) {
-    console.log("Update Button Pressed");
-}
-
-updateButton.addEventListener('click', updateButtonHandler);
 
 
 /* Button Listeners */
@@ -355,7 +279,7 @@ const watchlistEventListener = document.getElementById('watchlist_toggle');
 var showWatchlist = true;
 const dataDiv = document.querySelector('.visualized-data');
 
-const watchlistInputHandler = function(event) {
+const watchlistInputHandler = function (event) {
     /*TODO: toggle watchlist*/
     /*change candlestick-chart top=50%, max-height=700px*/
     /*change data-table dislplay to none*/
@@ -399,7 +323,7 @@ watchlistEventListener.addEventListener('click', watchlistInputHandler);
 // Box Zoom
 const zoomButton = document.getElementById('zoom_button');
 
-const zoomButtonHandler = function(event) {
+const zoomButtonHandler = function (event) {
     console.log("Zoom Button Pressed");
 };
 
@@ -408,7 +332,7 @@ zoomButton.addEventListener('click', zoomButtonHandler);
 // Zoom Out
 const zoomOutButton = document.getElementById('zoom_out_button');
 
-const zoomOutButtonHandler = function(event) {
+const zoomOutButtonHandler = function (event) {
     console.log("Zoom Out Button Pressed");
 }
 
@@ -417,7 +341,7 @@ zoomOutButton.addEventListener('click', zoomOutButtonHandler);
 // Undo
 const undoButton = document.getElementById('undo_button');
 
-const undoButtonHandler = function(event) {
+const undoButtonHandler = function (event) {
     console.log("Undo Button Pressed");
 }
 
@@ -426,7 +350,7 @@ undoButton.addEventListener('click', undoButtonHandler);
 // Redo
 const redoButton = document.getElementById('redo_button');
 
-const redoButtonHandler = function(event) {
+const redoButtonHandler = function (event) {
     console.log("Redo Button Pressed");
 }
 
@@ -435,7 +359,7 @@ redoButton.addEventListener('click', redoButtonHandler);
 // Reset
 const resetButton = document.getElementById('reset_button');
 
-const resetButtonHandler = function(event) {
+const resetButtonHandler = function (event) {
     console.log("Reset Button Pressed");
 }
 
@@ -444,7 +368,7 @@ resetButton.addEventListener('click', resetButtonHandler);
 // Save
 const saveButton = document.getElementById('save_button');
 
-const saveButtonHandler = function(event) {
+const saveButtonHandler = function (event) {
     console.log('Save Button Pressed');
 }
 
