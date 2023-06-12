@@ -45,18 +45,66 @@
                     </div>
                     <div class="type-bar">
                         <select id="account_type" name="type-input" placeholder="Select Data">
-                            <option value="market-cap">시가총액</option>
-                            <option value="roe">ROE</option>
-                            <option value="dividend">배당수익률</option>
-                            <option value="stocks">상장주식수</option>
-                            <option value="foreign-stocks">외국인비율</option>
-                            <option value="sales">매출액</option>
-                            <option value="profit">영업이익</option>
-                            <option value="profit-rate">영업이익률</option>
-                            <option value="debt">부채비율</option>
-                            <option value="eps">EPS</option>
-                            <option value="per">PER</option>
-                            <option value="pbr">PBR</option>
+                            <option value="자산총계">자산총계</option>
+                            <option value="유동자산">유동자산</option>
+                            <option value="현금및현금성자산">현금및현금성자산</option>
+                            <option value="매출채권 및 기타유동채권">매출채권 및 기타유동채권</option>
+                            <option value="재고자산">재고자산</option>
+                            <option value="기타유동자산">기타유동자산</option>
+                            <option value="비유동자산">비유동자산</option>
+                            <option value="장기성수취채권">장기성수취채권</option>
+                            <option value="유형자산">유형자산</option>
+                            <option value="투자부동산">투자부동산</option>
+                            <option value="무형자산">무형자산</option>
+                            <option value="장기금융자산">장기금융자산</option>
+                            <option value="이연법인세자산">이연법인세자산</option>
+                            <option value="부채총계">부채총계</option>
+                            <option value="유동부채">유동부채</option>
+                            <option value="매입채무 및 기타유동채무">매입채무 및 기타유동채무</option>
+                            <option value="단기차입금">단기차입금</option>
+                            <option value="유동성장기차입금">유동성장기차입금</option>
+                            <option value="유동충당부채">유동충당부채</option>
+                            <option value="당기법인세부채">당기법인세부채</option>
+                            <option value="비유동부채">비유동부채</option>
+                            <option value="기타비유동금융부채">기타비유동금융부채</option>
+                            <option value="장기차입금">장기차입금</option>
+                            <option value="이연법인세부채">이연법인세부채</option>
+                            <option value="자본총계">자본총계</option>
+                            <option value="지배기업의 소유지분">지배기업의 소유지분</option>
+                            <option value="납입자본">납입자본</option>
+                            <option value="자본금">자본금</option>
+                            <option value="이익잉여금(결손금)">이익잉여금(결손금)</option>
+                            <option value="기타자본구성요소">기타자본구성요소</option>
+                            <option value="비지배주주지분">비지배주주지분</option>
+                            <option value="영업활동 현금흐름">영업활동 현금흐름</option>
+                            <option value="당기순이익">당기순이익</option>
+                            <option value="당기순이익조정을 위한 가감">당기순이익조정을 위한 가감</option>
+                            <option value="영업활동으로 인한 자산부채의 변동">영업활동으로 인한 자산부채의 변동</option>
+                            <option value="이자지급">이자지급</option>
+                            <option value="이자수취">이자수취</option>
+                            <option value="배당금수취">배당금수취</option>
+                            <option value="법인세납부액">법인세납부액</option>
+                            <option value="투자활동 현금흐름">투자활동 현금흐름</option>
+                            <option value="단기금융상품의 취득">단기금융상품의 취득</option>
+                            <option value="장기금융상품의 취득">장기금융상품의 취득</option>
+                            <option value="단기금융상품의 처분">단기금융상품의 처분</option>
+                            <option value="장기금융상품의 처분">장기금융상품의 처분</option>
+                            <option value="기타비유동자산의 취득">기타비유동자산의 취득</option>
+                            <option value="기타비유동자산의 처분">기타비유동자산의 처분</option>
+                            <option value="유형자산의 처분">유형자산의 처분</option>
+                            <option value="무형자산의 처분">무형자산의 처분</option>
+                            <option value="유형자산의 취득">유형자산의 취득</option>
+                            <option value="유형자산의 취득">유형자산의 취득</option>
+                            <option value="투자부동산의 처분">투자부동산의 처분</option>
+                            <option value="재무활동 현금흐름">재무활동 현금흐름</option>
+                            <option value="단기차입금의 차입">단기차입금의 차입</option>
+                            <option value="장기차입금의 차입">장기차입금의 차입</option>
+                            <option value="단기차입금의 상환">단기차입금의 상환</option>
+                            <option value="장기차입금의 상환">장기차입금의 상환</option>
+                            <option value="현금및현금성자산에 대한 환율변동효과">현금및현금성자산에 대한 환율변동효과</option>
+                            <option value="현금및현금성자산의순증가">현금및현금성자산의순증가</option>
+                            <option value="기초현금및현금성자산">기초현금및현금성자산</option>
+                            <option value="기말현금및현금성자산">기말현금및현금성자산</option>
                         </select>
                     </div>
                     <div class="high-low-slider">
@@ -75,7 +123,9 @@
                         </form>
                         <div class="percent-icon"><img src="icons/percent.svg"></div>
                     </div>
-
+                    <div class="update_button_container">
+                        <button class="update_button"></b>Update</button>
+                    </div>
                     <div class="logo-placement"><img src="logo/logo.svg" id="logo"></div>
                 </div>
 

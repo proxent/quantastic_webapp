@@ -366,6 +366,21 @@ input::-webkit-inner-spin-button {
     transform: translate(-50%, -50%);
 }
 
+.update_button_container {
+    display: relative;
+    order: 6;
+}
+
+.update_button {
+    width: 100px;
+    height: 35px;
+    border: 1px solid var(--keppel-green);
+    border-radius: 10px;
+    color: var(--custom-white);
+    background-color: var(--gordons-green);
+    font-weight: bold;
+}
+
 #logo {
     width: 296;
     height: 38;

@@ -98,75 +98,79 @@ function createPlot(dates, totals) {
 }
 
 var accountData = {
-    '자산총계': 'ifrs_Assets',
-    '유동자산': 'ifrs_CurrentAssets',
-    '현금및현금성자산': 'ifrs_CashAndCashEquivalents',
-    '매출채권 및 기타유동채권': 'ifrs_TradeAndOtherCurrentReceivables',
-    '재고자산': 'ifrs_Inventories',
-    '기타유동자산': 'ifrs_OtherCurrentNonfinancialAssets',
-    '비유동자산': 'ifrs_NoncurrentAssets',
-    '장기성수취채권': 'dart_LongTermTradeAndOtherNonCurrentReceivablesGross',
-    '유형자산': 'ifrs_PropertyPlantAndEquipment',
-    '투자부동산': 'ifrs_InvestmentProperty',
-    '무형자산': 'ifrs_IntangibleAssetsOtherThanGoodwill',
-    '장기금융자산': 'ifrs_OtherNoncurrentFinancialAssets',
-    '이연법인세자산': 'ifrs_DeferredTaxAssets',
-    '부채총계': 'ifrs_Liabilities',
-    '유동부채': 'ifrs_CurrentLiabilities',
-    '매입채무 및 기타유동채무': 'ifrs_TradeAndOtherCurrentPayables',
-    '단기차입금': 'dart_ShortTermBorrowings',
-    '유동성장기차입금': 'ifrs_CurrentPortionOfLongtermBorrowings',
-    '유동충당부채': 'ifrs_CurrentProvisions',
-    '당기법인세부채': 'ifrs_CurrentTaxLiabilities',
-    '비유동부채': 'ifrs_NoncurrentLiabilities',
-    '기타비유동금융부채': 'ifrs_OtherNoncurrentFinancialLiabilities',
-    '장기차입금': 'dart_LongTermBorrowingsGross',
-    '이연법인세부채': 'ifrs_DeferredTaxLiabilities',
-    '자본총계': 'ifrs_Equity',
-    '지배기업의 소유지분': 'EquityAttributableToOwnersOfParent',
-    '납입자본': 'dart_ContributedEquity',
-    '자본금': 'ifrs_IssuedCapital',
-    '이익잉여금(결손금)': 'ifrs_RetainedEarnings',
-    '기타자본구성요소': 'dart_ElementsOfOtherStockholdersEquity',
-    '비지배주주지분': 'ifrs_NoncontrollingInterests',
-    '영업활동 현금흐름': 'ifrs_CashFlowsFromUsedInOperatingActivities',
-    '당기순이익': 'dart_ProfitLossForStatementOfCashFlows',
-    '당기순이익조정을 위한 가감': 'ifrs_AdjustmentsForReconcileProfitLoss',
-    '영업활동으로 인한 자산부채의 변동': 'dart_AdjustmentsForAssetsLiabilitiesOfOperatingActivities',
-    '이자지급': 'ifrs_InterestPaidClassifiedAsOperatingActivities',
-    '이자수취': 'ifrs_InterestReceivedClassifiedAsOperatingActivities',
-    '배당금수취': 'ifrs_DividendsReceivedClassifiedAsOperatingActivities',
-    '법인세납부액': 'ifrs_IncomeTaxesPaidRefundClassifiedAsOperatingActivities',
-    '투자활동 현금흐름': 'ifrs_CashFlowsFromUsedInInvestingActivities',
-    '단기금융상품의 취득': 'dart_PurchaseOfShortTermFinancialInstruments',
-    '장기금융상품의 취득': 'dart_PurchaseOfLongTermFinancialInstruments',
-    '단기금융상품의 처분': 'dart_ProceedsFromSalesOfShortTermFinancialInstruments',
-    '장기금융상품의 처분': 'dart_ProceedsFromSalesOfLongTermFinancialInstruments',
-    '기타비유동자산의 취득': 'dart_PurchaseOfOtherNonCurrentFinancialAssets',
-    '기타비유동자산의 처분': 'dart_ProceedsFromSalesOfOtherNonCurrentFinancialAssets',
-    '유형자산의 처분': 'ifrs_ProceedsFromSalesOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities',
-    '무형자산의 처분': 'ifrs_ProceedsFromSalesOfIntangibleAssetsClassifiedAsInvestingActivities',
-    '유형자산의 취득': 'ifrs_PurchaseOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities',
-    '유형자산의 취득': 'ifrs_PurchaseOfIntangibleAssetsClassifiedAsInvestingActivities',
-    '투자부동산의 처분': 'dart_ProceedsFromSalesOfInvestmentProperty',
-    '재무활동 현금흐름': 'ifrs_CashFlowsFromUsedInFinancingActivities',
-    '단기차입금의 차입': 'dart_ProceedsFromShortTermBorrowings',
-    '장기차입금의 차입': 'dart_ProceedsFromLongTermBorrowings',
-    '단기차입금의 상환': 'dart_RepaymentsOfShortTermBorrowings',
-    '장기차입금의 상환': 'dart_RepaymentsOfLongTermBorrowings',
-    '현금및현금성자산에 대한 환율변동효과': 'ifrs_EffectOfExchangeRateChangesOnCashAndCashEquivalents',
-    '현금및현금성자산의순증가': 'ifrs_IncreaseDecreaseInCashAndCashEquivalents',
-    '기초현금및현금성자산': 'dart_CashAndCashEquivalentsAtBeginningOfPeriodCf',
-    '기말현금및현금성자산': 'dart_CashAndCashEquivalentsAtEndOfPeriodCf'
+    'ifrs_Assets': '자산총계',
+    'ifrs_CurrentAssets': '유동자산',
+    'ifrs_CashAndCashEquivalents': '현금및현금성자산',
+    'ifrs_TradeAndOtherCurrentReceivables': '매출채권 및 기타유동채권',
+    'ifrs_Inventories': '재고자산',
+    'ifrs_OtherCurrentNonfinancialAssets': '기타유동자산',
+    'ifrs_NoncurrentAssets': '비유동자산',
+    'dart_LongTermTradeAndOtherNonCurrentReceivablesGross': '장기성수취채권',
+    'ifrs_PropertyPlantAndEquipment': '유형자산',
+    'ifrs_InvestmentProperty': '투자부동산',
+    'ifrs_IntangibleAssetsOtherThanGoodwill': '무형자산',
+    'ifrs_OtherNoncurrentFinancialAssets': '장기금융자산',
+    'ifrs_DeferredTaxAssets': '이연법인세자산',
+    'ifrs_Liabilities': '부채총계',
+    'ifrs_CurrentLiabilities': '유동부채',
+    'ifrs_TradeAndOtherCurrentPayables': '매입채무 및 기타유동채무',
+    'dart_ShortTermBorrowings': '단기차입금',
+    'ifrs_CurrentPortionOfLongtermBorrowings': '유동성장기차입금',
+    'ifrs_CurrentProvisions': '유동충당부채',
+    'ifrs_CurrentTaxLiabilities': '당기법인세부채',
+    'ifrs_NoncurrentLiabilities': '비유동부채',
+    'ifrs_OtherNoncurrentFinancialLiabilities': '기타비유동금융부채',
+    'dart_LongTermBorrowingsGross': '장기차입금',
+    'ifrs_DeferredTaxLiabilities': '이연법인세부채',
+    'ifrs_Equity': '자본총계',
+    'EquityAttributableToOwnersOfParent': '지배기업의 소유지분',
+    'dart_ContributedEquity': '납입자본',
+    'ifrs_IssuedCapital': '자본금',
+    'ifrs_RetainedEarnings': '이익잉여금(결손금)',
+    'dart_ElementsOfOtherStockholdersEquity': '기타자본구성요소',
+    'ifrs_NoncontrollingInterests': '비지배주주지분',
+    'ifrs_CashFlowsFromUsedInOperatingActivities': '영업활동 현금흐름',
+    'dart_ProfitLossForStatementOfCashFlows': '당기순이익',
+    'ifrs_AdjustmentsForReconcileProfitLoss': '당기순이익조정을 위한 가감',
+    'dart_AdjustmentsForAssetsLiabilitiesOfOperatingActivities': '영업활동으로 인한 자산부채의 변동',
+    'ifrs_InterestPaidClassifiedAsOperatingActivities': '이자지급',
+    'ifrs_InterestReceivedClassifiedAsOperatingActivities': '이자수취',
+    'ifrs_DividendsReceivedClassifiedAsOperatingActivities': '배당금수취',
+    'ifrs_IncomeTaxesPaidRefundClassifiedAsOperatingActivities': '법인세납부액',
+    'ifrs_CashFlowsFromUsedInInvestingActivities': '투자활동 현금흐름',
+    'dart_PurchaseOfShortTermFinancialInstruments': '단기금융상품의 취득',
+    'dart_PurchaseOfLongTermFinancialInstruments': '장기금융상품의 취득',
+    'dart_ProceedsFromSalesOfShortTermFinancialInstruments': '단기금융상품의 처분',
+    'dart_ProceedsFromSalesOfLongTermFinancialInstruments': '단기금융상품의 처분',
+    'dart_PurchaseOfOtherNonCurrentFinancialAssets': '기타비유동자산의 취득',
+    'dart_ProceedsFromSalesOfOtherNonCurrentFinancialAssets': '기타비유동자산의 처분',
+    'ifrs_ProceedsFromSalesOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities': '유형자산의 처분',
+    'ifrs_ProceedsFromSalesOfIntangibleAssetsClassifiedAsInvestingActivities': '무형자산의 처분',
+    'ifrs_PurchaseOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities': '유형자산의 취득',
+    'ifrs_PurchaseOfIntangibleAssetsClassifiedAsInvestingActivities': '유형자산의 취득',
+    'dart_ProceedsFromSalesOfInvestmentProperty': '투자부동산의 처분',
+    'ifrs_CashFlowsFromUsedInFinancingActivities': '재무활동 현금흐름',
+    'dart_ProceedsFromShortTermBorrowings': '단기차입금의 차입',
+    'dart_ProceedsFromLongTermBorrowings': '장기차입금의 차입',
+    'dart_RepaymentsOfShortTermBorrowings': '단기차입금의 상환',
+    'dart_RepaymentsOfLongTermBorrowings': '장기차입금의 상환',
+    'ifrs_EffectOfExchangeRateChangesOnCashAndCashEquivalents': '현금및현금성자산에 대한 환율변동효과',
+    'ifrs_IncreaseDecreaseInCashAndCashEquivalents': '현금및현금성자산의순증가',
+    'dart_CashAndCashEquivalentsAtBeginningOfPeriodCf': '기초현금및현금성자산',
+    'dart_CashAndCashEquivalentsAtEndOfPeriodCf': '기말현금및현금성자산'
 }
 
 // FLOW - 지표 선택
-// Based on chosen option from dropdown menu, updte account_code on payload
+// Based on chosen option from dropdown menu, update account_code on payload
 // Based on account_code on payload, call getAccountName(account_name)
 
 var selectedAccountName = '자산총계'; //selected from dropdown menu
 var selectedAccountCode = accountData[selectedAccountName];
 console.log(selectedAccountCode); // Output: ifrs_Assets
+
+console.log(accountData[selectedAccountCode]);
+
+
 
 
 function getAccountName(account_code) {
@@ -238,8 +242,10 @@ function createDataTable(account_code, account_name, dates, totals, change) {
     Plotly.newPlot('data-table-chart', dataTableData, dataTableLayout);
 }
 
-
-
+function UpdatePlot(data, layout) {
+    
+    Plotly.newPlot('candlestick-chart', data, layout);
+}
 
 
 /* Get Date Input */
@@ -265,6 +271,7 @@ endDateInput.addEventListener('change', dateInputHandler);
 
 
 //TODO : Make graph update based on start and end date
+// PLAN : create UpdatePlot() function
 /*
 const updateDate = function(event) {
     
@@ -274,11 +281,13 @@ const updateDate = function(event) {
 /* Get Type input */
 
 const accountInput = document.getElementById('account_type');
-console.log(accountInput.value);
+console.log(accountInput.value); // print initial value
 
 const accountInputHandler = function(event) {
     console.log(event.target.value);
     console.log('Account Type Changed: ' + accountInput.value);
+    
+    UpdatePlot();
 }
 
 accountInput.addEventListener('change', accountInputHandler);
@@ -315,6 +324,14 @@ percentInput.addEventListener('change', percentInputHandler);
      WORKAROUND: Disable ENTER key -- event.keyCode != 13
  ISSUE: after giving input of 3 digits AND >100 --> can no longer change text, can only change after erasing all of text
 */
+
+const updateButton = document.querySelector(".update_button");
+
+const updateButtonHandler = function(event) {
+    console.log("Update Button Pressed");
+}
+
+updateButton.addEventListener('click', updateButtonHandler);
 
 
 /* Button Listeners */
@@ -384,7 +401,6 @@ const zoomOutButtonHandler = function(event) {
 zoomOutButton.addEventListener('click', zoomOutButtonHandler);
 
 // Undo
-
 const undoButton = document.getElementById('undo_button');
 
 const undoButtonHandler = function(event) {
@@ -394,7 +410,6 @@ const undoButtonHandler = function(event) {
 undoButton.addEventListener('click', undoButtonHandler);
 
 // Redo
-
 const redoButton = document.getElementById('redo_button');
 
 const redoButtonHandler = function(event) {
@@ -404,7 +419,6 @@ const redoButtonHandler = function(event) {
 redoButton.addEventListener('click', redoButtonHandler);
 
 // Reset
-
 const resetButton = document.getElementById('reset_button');
 
 const resetButtonHandler = function(event) {
@@ -414,7 +428,6 @@ const resetButtonHandler = function(event) {
 resetButton.addEventListener('click', resetButtonHandler);
 
 // Save
-
 const saveButton = document.getElementById('save_button');
 
 const saveButtonHandler = function(event) {
