@@ -114,7 +114,8 @@ body {
 .results {
     background-color: rgba(48, 53, 49, 0.3);
     border-radius: 20px;
-    border: 1px solid var(--keppel-green);
+    /*border: 1px solid var(--keppel-green);*/
+    padding-bottom: 5px;
     position: relative;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
@@ -139,7 +140,7 @@ body {
     width: 1590px;
     height: 700px;
     border-radius: 20px;
-    border: 1px solid var(--keppel-green);
+    /*border: 1px solid var(--keppel-green);*/
     margin: 0px 20px 10px 10px;
 }
 
@@ -172,7 +173,8 @@ body {
     width: 120px;
     height: 35px;
     border-radius: 10px;
-    border: 1px solid var(--keppel-green);
+    /*border: 1px solid var(--keppel-green);*/
+    border: none;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);
     padding-left: 20px;
     padding-right: 20px;
@@ -181,7 +183,7 @@ body {
 
 .header .date-bar input[type="date"]:focus {
     /*border-color: transparent;*/
-    border: 1px solid var(--keppel-green);
+    /*border: 1px solid var(--keppel-green);*/
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);
     outline: 0;
 }
@@ -211,7 +213,8 @@ body {
     width: 280px;
     height: 35px;
     border-radius: 10px;
-    border: 1px solid var(--keppel-green);
+    /*border: 1px solid var(--keppel-green);*/
+    border: none;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);
     padding-left: 20px;
     flex: 1;
@@ -219,7 +222,7 @@ body {
 
 .header .type-bar select:focus {
     /*border-color: transparent;*/
-    border: 1px solid var(--keppel-green);
+    /*border: 1px solid var(--keppel-green);*/
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);
     outline: 0;
 }
@@ -253,7 +256,7 @@ body {
     right: 0;
     bottom: 0;
     background-color: var(--gordons-green);
-    border: 1px solid var(--keppel-green);
+    /*border: 1px solid var(--keppel-green);*/
     filter: drop-shadow(0px 2px 8px rgba(0, 0, 0, 0.25));
     -webkit-transition: .4s;
     transition: .4s;
@@ -265,8 +268,10 @@ body {
     content: "";
     height: 20px;
     width: 20px;
-    left: 4px;
-    bottom: 3.5px;
+    /*left: 4px;*/
+    left: 4.5px;
+    /*bottom: 3.5px;*/
+    bottom: 5px;
     background-color: var(--custom-white);
     -webkit-transition: .4s;
     transition: .4s;
@@ -311,7 +316,8 @@ input:checked + .round-slider:before {
     width: 60px;
     height: 35px;
     border-radius: 10px;
-    border: 1px solid var(--keppel-green);
+    /*border: 1px solid var(--keppel-green);*/
+    border: none;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);
     padding-left: 20px;
     padding-right: 20px;
@@ -331,12 +337,14 @@ input::-webkit-inner-spin-button {
     outline: 0;
 }
 
+/*
 .header .percent-bar .rank-icon {
     position: absolute;
     width: 20px;
     height: 20px;
     margin-left: 70px;
 }
+*/
 
 /*
 .header .update {
@@ -371,14 +379,23 @@ input::-webkit-inner-spin-button {
     order: 6;
 }
 
-.update_button {
+#update_button {
     width: 100px;
-    height: 35px;
-    border: 1px solid var(--keppel-green);
+    height: 40px;
+    border: none;
     border-radius: 10px;
     color: var(--custom-white);
     background-color: var(--gordons-green);
     font-weight: bold;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);
+    margin-left: 20px;
+    font-family: 'Droid Sans';
+    color: var(--keppel-green);
+}
+
+#update_button:hover {
+    background-color: var(--keppel-green);
+    color: var(--custom-white);
 }
 
 #logo {
@@ -477,3 +494,18 @@ input::-webkit-inner-spin-button {
     width: 100px;
     height: 100px;
 }
+
+
+/*
+NOTES ON CHANGES
+
+--06.11--
+Change percentage rank to placement rank
+
+--06.14-- Design Clean-Up
+Decided to eliminate borders for .results, .viewport-rect
+Added padding-bottom: 5px to .results
+Eliminated borders to date-start, date-end, type-bar select, high-low-slider, percent-bar [input="text"]
+Changed focus effects from border color to background color
+Changed .round-slider:before left from 4px to 4.5px and bottom from 3.5px to 5px
+*/

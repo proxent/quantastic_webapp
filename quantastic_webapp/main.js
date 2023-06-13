@@ -28,7 +28,7 @@ const layout = {
     yaxis: {
       
         autorange: true,
-        dtick: 1000,
+        dtick: 10,
         gridcolor: '#525953',
         side: 'right'
     },
@@ -68,8 +68,6 @@ async function fetchAPI() {
     });
     const data = await response.json();
     console.log(response, data);
-
-
 
     const dates = data.prices.map(price => price.Date);
     const totals = data.prices.map(price => parseFloat(price.total));
@@ -373,3 +371,12 @@ const saveButtonHandler = function (event) {
 }
 
 saveButton.addEventListener('click', saveButtonHandler);
+
+// User Profile
+const userButton = document.getElementById('user_profile');
+
+const userButtonHandler = function(event) {
+    alert("User Profile: Not yet implemented.");
+}
+
+userButton.addEventListener('click', userButtonHandler);
