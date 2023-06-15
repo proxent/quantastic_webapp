@@ -69,20 +69,21 @@ async function fetchAPI() {
 
     const dates = data.prices.map(price => price.Date);
     const totals = data.prices.map(price => parseFloat(price.total));
+    const benchmark = data.benchmark.map(price => parseFloat(price.total));
 
     var account_code = payload.account_code;
     //var account_name = getAccountName(account_code);
     var account_name = accountData[account_code];
     var change = getChange(totals);
 
-    createPlot(dates, totals);
+    createPlot(dates, totals, benchmark);
     createDataTable(account_code, account_name, dates, totals, change);
     hideLoading();
 
 }
 
-function createPlot(dates, totals) {
-    const trace = {
+function createPlot(dates, totals, benchmark) {
+    const target = {
         x: dates,
         y: totals,
         mode: 'lines',
@@ -93,16 +94,18 @@ function createPlot(dates, totals) {
         type: 'scatter'
     };
 
-    // Compute the slope between consecutive points and set the line color accordingly
-    for (let i = 1; i < totals.length; i++) {
-        const slope = totals[i] - totals[i - 1];
-        if (slope > 0) {
-            trace.line.color[i - 1] = '#53b18c'; // Green color for increasing values
-        } else {
-            trace.line.color[i - 1] = '#FF4136'; // Red color for decreasing values
-        }
-    }
-    const data = [trace];
+    const benchmarkLines = {
+        x: dates,
+        y: benchmark,
+        mode: 'lines',
+        line: {
+            color: '#ac4e73',
+            witdth: 2
+        },
+        type: 'scatter'
+    };
+
+    const data = [target, benchmarkLines];
     Plotly.newPlot('chart', data, layout);
 }
 
@@ -333,33 +336,6 @@ const zoomOutButtonHandler = function (event) {
 }
 
 zoomOutButton.addEventListener('click', zoomOutButtonHandler);
-
-// Undo
-const undoButton = document.getElementById('undo_button');
-
-const undoButtonHandler = function (event) {
-    console.log("Undo Button Pressed");
-}
-
-undoButton.addEventListener('click', undoButtonHandler);
-
-// Redo
-const redoButton = document.getElementById('redo_button');
-
-const redoButtonHandler = function (event) {
-    console.log("Redo Button Pressed");
-}
-
-redoButton.addEventListener('click', redoButtonHandler);
-
-// Reset
-const resetButton = document.getElementById('reset_button');
-
-const resetButtonHandler = function (event) {
-    console.log("Reset Button Pressed");
-}
-
-resetButton.addEventListener('click', resetButtonHandler);
 
 // Save
 const saveButton = document.getElementById('save_button');
