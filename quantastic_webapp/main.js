@@ -42,11 +42,11 @@ const payload = {
 };
 
 function showLoading() {
-    document.getElementById("loading").style.display = "block";
+    document.querySelector(".loading").style.display = "block";
 }
 
 function hideLoading() {
-    document.getElementById("loading").style.display = "none";
+    document.querySelector(".loading").style.display = "none";
 }
 
 async function fetchAPI() {
