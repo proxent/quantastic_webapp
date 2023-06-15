@@ -26,7 +26,7 @@ const layout = {
         gridcolor: '#525953',
     },
     yaxis: {
-      
+
         autorange: true,
         dtick: 10,
         gridcolor: '#525953',
@@ -58,7 +58,6 @@ async function fetchAPI() {
         'rank': document.getElementById('rank').value,
         'order': document.getElementById('order').checked ? 'desc' : 'asc',
     };
-    console.log('payload', payload);
     const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -67,13 +66,9 @@ async function fetchAPI() {
         body: JSON.stringify(payload),
     });
     const data = await response.json();
-    console.log(response, data);
 
     const dates = data.prices.map(price => price.Date);
     const totals = data.prices.map(price => parseFloat(price.total));
-
-    console.log(dates);
-    console.log(totals);
 
     var account_code = payload.account_code;
     //var account_name = getAccountName(account_code);
@@ -180,7 +175,6 @@ const accountData = {
 
 var selectedAccountCode = 'ifrs_Assets'; //selected from dropdown menu
 var selectedAccountName = accountData[selectedAccountCode];
-console.log(selectedAccountName); // Output: 자산총계
 
 /*
 function getAccountName(account_code) {
@@ -318,11 +312,13 @@ const watchlistInputHandler = function (event) {
 
 watchlistEventListener.addEventListener('click', watchlistInputHandler);
 
+const chart = document.getElementById('chart');
+
 // Box Zoom
 const zoomButton = document.getElementById('zoom_button');
 
 const zoomButtonHandler = function (event) {
-    console.log("Zoom Button Pressed");
+    Plotly.relayout(chart, { dragmode: 'zoom' });
 };
 
 zoomButton.addEventListener('click', zoomButtonHandler);
@@ -331,7 +327,9 @@ zoomButton.addEventListener('click', zoomButtonHandler);
 const zoomOutButton = document.getElementById('zoom_out_button');
 
 const zoomOutButtonHandler = function (event) {
-    console.log("Zoom Out Button Pressed");
+    Plotly.relayout(chart, {
+        'dragmode': 'pan', 'xaxis.autorange': true, 'yaxis.autorange': true
+    });
 }
 
 zoomOutButton.addEventListener('click', zoomOutButtonHandler);
@@ -375,7 +373,7 @@ saveButton.addEventListener('click', saveButtonHandler);
 // User Profile
 const userButton = document.getElementById('user_profile');
 
-const userButtonHandler = function(event) {
+const userButtonHandler = function (event) {
     alert("User Profile: Not yet implemented.");
 }
 
