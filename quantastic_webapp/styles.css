@@ -390,7 +390,7 @@ input::-webkit-inner-spin-button {
     font-weight: bold;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);
     margin-left: 20px;
-    font-family: 'Droid Sans';
+    font-family: 'Noto Sans';
     color: var(--keppel-green);
 }
 
@@ -555,4 +555,6 @@ Changed .round-slider:before left from 4px to 4.5px and bottom from 3.5px to 5px
 Add animated loading slider
 Remove undo, redo, reset icons
 Change margin-top of .sidemenu-others from 255px to 400px
+Change font from Droid Sans to Noto Sans
+Embed custom font from Google Fonts
 */
