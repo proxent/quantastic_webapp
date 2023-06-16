@@ -232,14 +232,14 @@ function createDataTable(account_code, account_name, dates, totals, change) {
             align: ["left", "left"],
             line: { width: 1, color: dark_gordons_green },
             fill: { color: dark_gordons_green },
-            font: { family: "Droid Sans", size: 12, color: "white" }
+            font: { family: "Noto Sans", size: 12, color: "white" }
         },
         cells: {
             values: dataTableValues,
             align: ["left", "left"],
             line: { color: dark_gordons_green, width: 1 },
             fill: { color: [dark_gordons_green, dark_gordons_green] },
-            font: { family: "Droid Sans", size: 11, color: [light_grey_gordons_green] }
+            font: { family: "Noto Sans", size: 11, color: [light_grey_gordons_green] }
         }
     }]
 
