@@ -6,7 +6,7 @@ const keppel_green = '#53b18c';
 const custom_red = '#FF4136';
 
 // FETCH DATA FROM SERVER
-const url = 'https://cors-anywhere.herokuapp.com/http://ec2-15-165-203-22.ap-northeast-2.compute.amazonaws.com:8080/backtest';
+const url = 'http://ec2-15-165-203-22.ap-northeast-2.compute.amazonaws.com:8080/backtest';
 const layout = {
     paper_bgcolor: 'rgba(0, 0, 0, 0)',
     plot_bgcolor: 'rgba(0, 0, 0, 0)',
