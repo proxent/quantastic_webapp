@@ -84,7 +84,7 @@ async function fetchAPI() {
 
 function createPlot(dates, totals, benchmark) {
     const target = {
-        name: 'Target',
+        name: 'Portfolio',
         x: dates,
         y: totals,
         mode: 'lines',
