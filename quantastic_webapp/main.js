@@ -84,6 +84,7 @@ async function fetchAPI() {
 
 function createPlot(dates, totals, benchmark) {
     const target = {
+        name: 'Target',
         x: dates,
         y: totals,
         mode: 'lines',
@@ -95,6 +96,7 @@ function createPlot(dates, totals, benchmark) {
     };
 
     const benchmarkLines = {
+        name: 'KODEX 200',
         x: dates,
         y: benchmark,
         mode: 'lines',
